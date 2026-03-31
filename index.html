@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="flex justify-center items-center h-screen">
+        <div class="font-[Orbitron] relative bg-mist-700 w-163 h-46 text-white font-bold text-8xl flex items-center justify-center">
+            <div id="hour" class="bg-mist-900 w-41 h-31 flex items-center justify-center">HH</div>
+            <span class="mx-3">:</span>
+            <div class="bg-mist-900 w-41 h-31 flex items-center justify-center" id="min">MM</div>
+            <span class="mx-3">:</span>
+            <div class="bg-mist-900 w-41 h-31 flex items-center justify-center" id="sec">SS</div>
+            <div class="absolute right-3 top-1 text-lg" id="session">PM</div>
+        </div>
+    </div>
+</body>
+<script>
+    function getTime() {
+        let time = new Date();
+
+        let hours = time.getHours();
+        let min = time.getMinutes();
+        let sec = time.getSeconds();
+
+        let session = 'AM'
+
+        if (hours > 12) {
+            hours -= 12;
+            session = "PM"
+        }
+
+        if (hours == 0) {
+            hours = 12;
+            session = 'AM'
+        }
+
+        if (hours < 10) hours = "0" + hours;
+        if (min < 10) min = "0" + min;
+        if (sec < 10) sec = "0" + sec;
+
+        let h = document.getElementById('hour')
+        let m = document.getElementById('min')
+        let s = document.getElementById('sec')
+        let sess = document.getElementById('session');
+
+        h.innerText = hours;
+        m.innerText = min;
+        s.innerText = sec;
+        sess.innerText = session
+
+        setTimeout(() => {
+            getTime()
+        }, 1000)
+    }
+
+    getTime()
+
+
+</script>
+
+</html>
